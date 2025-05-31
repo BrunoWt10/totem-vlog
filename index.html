@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="copyright" content="Desenvolvido por Bruno Silva ©" />
+    <title>Verificador de Mapas - VLOG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="manifest" href="site.webmanifest"> <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <button id="modeToggle" class="mode-toggle-btn">Mudar para Modo Claro</button>
+
+        <img src="vlog-logo.png" alt="VLOG Logo" class="logo">
+        <div id="clock"></div>
+
+        <h2>Verificador de Mapas Totem vs Excel/Texto</h2>
+
+        <label for="totem">Cole os mapas do Totem aqui:</label>
+        <textarea id="totem" placeholder="Cole os mapas do Totem aqui, um por linha..."></textarea>
+        <p class="map-count">Mapas identificados: <span id="totemMapCount">0</span></p>
+        <div class="button-group">
+            <button class="btn-save" onclick="saveTotemMaps()">Salvar Mapas do Totem</button>
+            <button class="btn-load" onclick="loadTotemMaps()">Carregar Mapas do Totem</button>
+        </div>
+
+        <label for="fileInput">Ou carregue um arquivo (Excel ou TXT):</label>
+        <input type="file" id="fileInput" accept=".xlsx, .xls, .txt" />
+        <label for="excelColumnIndex" class="excel-column-label">
+            Se for Excel, coluna dos mapas (1-baseado):
+            <span class="tooltip">?
+                <span class="tooltiptext">
+                    Indique o número da coluna que contém os mapas no seu arquivo Excel (ex: 1 para coluna A, 2 para B).
+                    Se o arquivo for TXT, este campo será ignorado.
+                </span>
+            </span>
+        </label>
+        <input type="number" id="excelColumnIndex" value="1" min="1" class="excel-column-input">
+        <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="statusExcel"></p>
+
+        <button onclick="verificar()">Verificar Mapas</button>
+        <button class="btn-clear" onclick="clearFields()">Limpar Tudo</button>
+
+        <div id="resultado" style="display: none;">
+            <h3>Resultados da Verificação</h3>
+            <input type="text" id="filterResults" placeholder="Filtrar resultados..." class="filter-input">
+            <div id="resultLists">
+            </div>
+        </div>
+
+        <button class="btn-totem" onclick="window.open('https://totem.br.spsa.com.br/totem', '_blank')">Acessar Totem</button>
+
+        <footer>Desenvolvido por Bruno Silva ©</footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
